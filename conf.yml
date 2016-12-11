@@ -1,0 +1,5 @@
+botname: gorkov
+server: irc.smoothirc.net:6667
+channel: "#gorkov"
+tls: false
+insecuretls: false
