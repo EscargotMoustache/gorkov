@@ -1,5 +1,5 @@
 botname: gorkov
 server: irc.smoothirc.net:6667
-channel: "#gorkov"
+channel: "#mangas"
 tls: false
 insecuretls: false

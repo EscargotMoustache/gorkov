@@ -4,10 +4,12 @@ import (
 	"math/rand"
 	"strings"
 	"time"
-	"fmt"
+	"os"
+	"log"
+	"bufio"
 )
 
-const PrefixLen = 1
+const PrefixLen = 2
 var MainChain *Chain
 
 type Prefix []string
@@ -25,6 +27,20 @@ type Chain struct {
 	Chain map[string][]string
 }
 
+func (c *Chain) Load(f string) {
+	file, err := os.Open(f)
+	if err != nil {
+		log.Println(err)
+	}
+
+	defer file.Close()
+
+	scanner := bufio.NewScanner(file)
+	for scanner.Scan() {
+		c.Build(scanner.Text())
+	}
+}
+
 func (c *Chain) Build(s string) {
 	p := make(Prefix, PrefixLen)
 	for _, v := range strings.Split(s, " ") {
@@ -32,7 +48,6 @@ func (c *Chain) Build(s string) {
 		c.Chain[key] = append(c.Chain[key], v)
 		p.Shift(v)
 	}
-	fmt.Println(c.Chain)
 }
 
 func (c *Chain) Generate() string {
@@ -40,7 +55,6 @@ func (c *Chain) Generate() string {
 	var words []string
 	for {
 		choices := c.Chain[p.String()]
-		fmt.Println(choices)
 		if len(choices) == 0 {
 			break
 		}

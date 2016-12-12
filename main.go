@@ -18,6 +18,7 @@ func main() {
 	}
 
 	markov.Init()
+	markov.MainChain.Load("bjf.txt")
 
 	ib := irc.IRC(conf.C.BotName, conf.C.BotName)
 
@@ -42,11 +43,9 @@ func main() {
 	ib.AddCallback("PRIVMSG", func (e *irc.Event) {
 		m := e.Message()
 		if strings.HasPrefix(m, "!") {
-			if strings.HasPrefix(m, "!mk") {
+			if strings.HasPrefix(m, "!bible") {
 				ib.Privmsg(conf.C.Channel, markov.MainChain.Generate())
 			}
-		} else if strings.HasPrefix(m, conf.C.BotName) {
-			ib.Privmsg(conf.C.Channel, markov.MainChain.Generate())
 		} else {
 			markov.MainChain.Build(m)
 		}
