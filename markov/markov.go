@@ -9,7 +9,7 @@ import (
 	"bufio"
 )
 
-const PrefixLen = 2
+var PrefixLen int
 var MainChain *Chain
 
 type Prefix []string
@@ -71,7 +71,8 @@ func NewChain() *Chain {
 	}
 }
 
-func Init() {
+func Init(pLen int) {
 	rand.Seed(time.Now().UnixNano())
 	MainChain = NewChain()
+	PrefixLen = pLen
 }

@@ -3,3 +3,4 @@ server: irc.smoothirc.net:6667
 channel: "#mangas"
 tls: false
 insecuretls: false
+prefixlen: 1

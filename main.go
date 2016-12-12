@@ -25,7 +25,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	markov.Init()
+	markov.Init(conf.C.PrefixLen)
 	markov.MainChain.Load("logs.txt")
 
 	ib := irc.IRC(conf.C.BotName, conf.C.BotName)
@@ -42,7 +42,6 @@ func main() {
 	}
 
 	ib.AddCallback("001", func (e *irc.Event) {
-		log.Printf(conf.C.Channel)
 		ib.Join(conf.C.Channel)
 	})
 
