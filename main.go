@@ -50,7 +50,7 @@ func main() {
 	ib.AddCallback("PRIVMSG", func (e *irc.Event) {
 		m := e.Message()
 		if strings.HasPrefix(m, "!") {
-			if strings.HasPrefix(m, "!bible") {
+			if strings.HasPrefix(m, "!mk") {
 				ib.Privmsg(conf.C.Channel, markov.MainChain.Generate())
 			}
 		} else {
