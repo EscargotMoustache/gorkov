@@ -4,6 +4,7 @@ import (
 	"crypto/tls"
 	"log"
 	"strings"
+	"os"
 
 	"github.com/thoj/go-ircevent"
 	"./conf"
@@ -13,12 +14,19 @@ import (
 func main() {
 	var err error
 
+	file, errf := os.OpenFile("logs.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600)
+	if errf != nil {
+		log.Fatal(errf)
+	}
+
+	defer file.Close()
+
 	if err = conf.Load("conf.yml"); err != nil {
 		log.Fatal(err)
 	}
 
 	markov.Init()
-	markov.MainChain.Load("bjf.txt")
+	markov.MainChain.Load("logs.txt")
 
 	ib := irc.IRC(conf.C.BotName, conf.C.BotName)
 
@@ -48,6 +56,7 @@ func main() {
 			}
 		} else {
 			markov.MainChain.Build(m)
+			file.WriteString(m+"\n")
 		}
 	})
 
