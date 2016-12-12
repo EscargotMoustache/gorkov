@@ -31,7 +31,7 @@ func (c *Chain) Build(s string) {
 		key := p.String()
 		c.Chain[key] = append(c.Chain[key], v)
 		p.Shift(v)
-		fmt.Println("%s : %s", key, v) // Debug
+		fmt.Printf("%s : %s", key, v) // Debug
 	}
 }
 
