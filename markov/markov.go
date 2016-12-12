@@ -7,7 +7,7 @@ import (
 	"fmt"
 )
 
-const PrefixLen = 2
+const PrefixLen = 1
 var MainChain *Chain
 
 type Prefix []string
@@ -31,8 +31,8 @@ func (c *Chain) Build(s string) {
 		key := p.String()
 		c.Chain[key] = append(c.Chain[key], v)
 		p.Shift(v)
-		fmt.Printf("%s : %s", key, v) // Debug
 	}
+	fmt.Println(c.Chain)
 }
 
 func (c *Chain) Generate() string {
@@ -40,6 +40,7 @@ func (c *Chain) Generate() string {
 	var words []string
 	for {
 		choices := c.Chain[p.String()]
+		fmt.Println(choices)
 		if len(choices) == 0 {
 			break
 		}
@@ -51,7 +52,9 @@ func (c *Chain) Generate() string {
 }
 
 func NewChain() *Chain {
-	return &Chain{make(map[string][]string)}
+	return &Chain{
+		make(map[string][]string),
+	}
 }
 
 func Init() {
