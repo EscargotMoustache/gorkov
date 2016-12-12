@@ -13,6 +13,7 @@ type Configuration struct {
 	BotName     string
 	TLS         bool
 	InsecureTLS bool
+	PrefixLen   int
 }
 
 var C = new(Configuration)
