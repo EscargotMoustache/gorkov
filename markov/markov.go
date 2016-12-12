@@ -4,6 +4,7 @@ import (
 	"math/rand"
 	"strings"
 	"time"
+	"fmt"
 )
 
 const PrefixLen = 2
@@ -30,6 +31,7 @@ func (c *Chain) Build(s string) {
 		key := p.String()
 		c.Chain[key] = append(c.Chain[key], v)
 		p.Shift(v)
+		fmt.Println("%v : %v", key, v) // Debug
 	}
 }
 
