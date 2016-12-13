@@ -50,10 +50,10 @@ func (c *Chain) Build(s string) {
 	}
 }
 
-func (c *Chain) Generate() string {
+func (c *Chain) Generate(n int) string {
 	p := make(Prefix, PrefixLen)
 	var words []string
-	for {
+	for i := 0; i < n; i++ {
 		choices := c.Chain[p.String()]
 		if len(choices) == 0 {
 			break

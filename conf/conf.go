@@ -14,6 +14,7 @@ type Configuration struct {
 	TLS         bool
 	InsecureTLS bool
 	PrefixLen   int
+	MessageLen  int
 }
 
 var C = new(Configuration)

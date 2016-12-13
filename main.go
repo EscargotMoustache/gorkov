@@ -26,7 +26,7 @@ func main() {
 	}
 
 	markov.Init(conf.C.PrefixLen)
-	markov.MainChain.Load("logs.txt")
+	markov.MainChain.Load("good.txt")
 
 	ib := irc.IRC(conf.C.BotName, conf.C.BotName)
 
@@ -51,11 +51,11 @@ func main() {
 		m := e.Message()
 		if strings.HasPrefix(m, "!") {
 			if strings.HasPrefix(m, "!mk") {
-				ib.Privmsg(conf.C.Channel, markov.MainChain.Generate())
+				ib.Privmsg(conf.C.Channel, markov.MainChain.Generate(conf.C.MessageLen))
 			}
 		} else {
 			markov.MainChain.Build(m)
-			file.WriteString(m+"\n")
+			file.WriteString(m + "\n")
 		}
 	})
 
