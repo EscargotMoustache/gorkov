@@ -53,7 +53,7 @@ func main() {
 			if strings.HasPrefix(m, "!mk") {
 				ib.Privmsg(conf.C.Channel, markov.MainChain.Generate(conf.C.MessageLen))
 			}
-		} else if len(strings.Fields(m)) > 3 && !string.Contains(message, conf.C.BotName) {
+		} else if len(strings.Fields(m)) > 3 && !strings.Contains(m, conf.C.BotName) && strings.Contains(e.Nick(), "Yuko") {
 			m = strings.Replace(m, `"`, "", -1)
 			m = strings.Replace(m, `(`, "", -1)
 			m = strings.Replace(m, `)`, "", -1)
